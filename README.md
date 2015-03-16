@@ -2,11 +2,13 @@ Meteor-Geolocation
 ====================
 
 
-Based on (mirrorcell:geolocation-plus)[https://atmospherejs.com/mirrorcell/geolocation-plus] but converted to coffeescript and changed things to my liking.
+Based on [mirrorcell:geolocation-plus](https://atmospherejs.com/mirrorcell/geolocation-plus) but converted to coffeescript and changed things more to my liking.
 
-Provides an abstraction (Location) from navigator.geolocation that is used to retrieve coordinates / speed / etc from browsers and mobile devices.
+Provides an abstraction (Location) from [`navigator.geolocation`](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation) that is used to retrieve coordinates / speed / etc from browsers and mobile devices.
 
-### Advantages of this package over meteor's core package:
+### Advantages 
+
+Advantages of this package over meteor's core package [mdg:geolocation](https://atmospherejs.com/mdg/geolocation):
 
    * Provides reactive and non reactive options to retrieve position
    * Manually stop and start watching positions (original watches continuously, horrible for battery)
