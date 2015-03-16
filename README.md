@@ -42,6 +42,12 @@ Stops the currently running watcher
 Location.stopWatching();
 ```
 
+**Location.isWatching()** - Continous GPS watching is on
+
+```
+Location.isWatching();
+```
+
 ## To retrieve coordinates
  
 **Location.getReactivePosition()** -
@@ -85,9 +91,12 @@ You can disable any of these by calling their specific disable function or Locat
 
 ### Setting GPS options
 
-* setWatchOptions(optionsObject) -- Sets the options for Location.watchPosition ( see docs for [`navigator.geolocation.watchPosition`](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions) for options)
+* `setWatchOptions(optionsObject)` -- Sets the options for Location.watchPosition ( see docs for [`navigator.geolocation.watchPosition`](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions) for options)
 
-* setGetPositionOptions(optionsObject) -- Sets the options for Location.locate ( see docs for [`navigator.geolocation.getCurrentPosition`](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions) for options)
+* `setGetPositionOptions(optionsObject)` -- Sets the options for Location.locate ( see docs for [`navigator.geolocation.getCurrentPosition`](https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions) for options)
+
+* `setErrorCallback(function)` - Set the error callback.  Callback takes one argument the error returned by `navigator.geolocation`
+
 
 ### Debug -
 To Turn on debugging console message: 

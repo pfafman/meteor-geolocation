@@ -55,7 +55,7 @@ storePosition = (pos) ->
   if options.persistent
     localStorage?.setItem('meteorGeolocation:lastPosition', posString)
   
-  reactiveLocation.set posObj
+  reactiveLocation.set(posObj)
   posObj
 
 
@@ -176,6 +176,10 @@ Location =
     if @_watching and navigator.geolocation
       navigator.geolocation.clearWatch(@_watchId)
       @_watching = false
+
+
+  clearLocation: ->
+    reactiveLocation.set(null)
     
 
   setWatchOptions: (options) ->
@@ -185,8 +189,8 @@ Location =
       @_watchOptions = options
     
 
-  isWatchind: ->
-    @_watching not false
+  isWatching: ->
+    @_watching isnt false
 
 
   setGetPositionOptions: (options) ->
