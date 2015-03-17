@@ -164,7 +164,7 @@ Location =
 
   locate: (callback) ->
     navigator?.geolocation?.getCurrentPosition (pos) ->
-      console.log('Get Current Position Received New Position: ' + JSON.stringify(pos)) if Location.debug
+      console.log('getCurrentPosition pos:' + JSON.stringify(pos)) if Location.debug
       filteredPos = filter(pos)
       if filteredPos
         fixed = storePosition(filteredPos)
@@ -175,7 +175,7 @@ Location =
   startWatching: (callback) ->
     if not @_watching and navigator.geolocation?
       @_watchId = navigator.geolocation.watchPosition (pos) ->
-        console.log('Start Watching Received New Position:', pos) if Location.debug
+        console.log('watchPosition pos:', pos) if Location.debug
         filteredPos = filter(pos)
         if filteredPos
           fixed = storePosition(filteredPos)
