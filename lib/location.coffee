@@ -7,7 +7,7 @@
 #
 
 options = 
-  persistent: true
+  persistent: false  # This causes issues with retreval on restart etc.
   lazyLastPosition: false
   distanceFilter:
     enabled: false
@@ -68,9 +68,7 @@ filter = (pos) ->
   if Location._options.distanceFilter.enabled
     console.log('Filtering distance') if Location.debug 
     distance = getDistance(old, pos)
-    
-    console.log('Distance Filter: Filter - ' + Location._options.distanceFilter.range + '. Actual Distance - ' + distance) if Location.debug 
-    
+    console.log('Distance Filter: Filter - ' + Location._options.distanceFilter.range + '. Actual Distance - ' + distance) if Location.debug
     if distance < Location._options.distanceFilter.range
       return
 
@@ -159,12 +157,12 @@ Location =
       if lastPos
         return JSON.parse(lastPos)
     else
-      console.log 'Location Error: You\'ve set perstitent storage to false'
+      console.log 'Location: Perstitent storage to off'
     
 
   locate: (callback) ->
     navigator?.geolocation?.getCurrentPosition (pos) ->
-      console.log('getCurrentPosition pos:' + JSON.stringify(pos)) if Location.debug
+      console.log('getCurrentPosition pos:', pos, pos.coords.latitude, pos.coords.longitude) if Location.debug
       filteredPos = filter(pos)
       if filteredPos
         fixed = storePosition(filteredPos)
@@ -175,7 +173,7 @@ Location =
   startWatching: (callback) ->
     if not @_watching and navigator.geolocation?
       @_watchId = navigator.geolocation.watchPosition (pos) ->
-        console.log('watchPosition pos:', pos) if Location.debug
+        console.log('watchPosition pos:', pos, pos.coords.latitude, pos.coords.longitude) if Location.debug
         filteredPos = filter(pos)
         if filteredPos
           fixed = storePosition(filteredPos)
