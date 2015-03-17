@@ -51,7 +51,6 @@ storePosition = (pos) ->
     updatedAt: pos.timestamp
 
   posString = JSON.stringify(posObj)
-  
   if options.persistent
     localStorage?.setItem('meteorGeolocation:lastPosition', posString)
   
@@ -141,6 +140,19 @@ Location =
     reactiveLocation.get()
 
 
+  setReactivePosition: (lat, lng) ->
+    posObj = 
+      latitude: lat
+      longitude: lng
+      accuracy: 1
+      altitudeAccuracy: 1
+      speed: 0
+      heading: 0
+      updatedAt: new Date().getTime()
+    reactiveLocation.set(posObj)
+
+
+
   getLastPosition: ->
     if options.persistent
       lastPos = localStorage.getItem('meteorGeolocation:lastPosition')
@@ -163,7 +175,7 @@ Location =
   startWatching: (callback) ->
     if not @_watching and navigator.geolocation?
       @_watchId = navigator.geolocation.watchPosition (pos) ->
-        console.log('Start Watching Received New Position: ' + JSON.stringify(pos)) if Location.debug
+        console.log('Start Watching Received New Position:', pos) if Location.debug
         filteredPos = filter(pos)
         if filteredPos
           fixed = storePosition(filteredPos)

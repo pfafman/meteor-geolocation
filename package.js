@@ -10,11 +10,11 @@ Package.describe({
     documentation: 'README.md'
 });
 
-/*
+
 Cordova.depends({
-    "org.apache.cordova.geolocation": "0.3.11"
+    "org.apache.cordova.geolocation": "0.3.12"
 });
-*/
+
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0.3.1');
