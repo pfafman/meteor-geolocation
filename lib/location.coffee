@@ -44,6 +44,7 @@ storePosition = (pos) ->
   posObj = 
     latitude: pos.coords.latitude
     longitude: pos.coords.longitude
+    altitude: pos.coords.altitude
     accuracy: pos.coords.accuracy
     altitudeAccuracy: pos.coords.altitudeAccuracy
     speed: pos.coords.speed
@@ -138,17 +139,18 @@ Location =
     reactiveLocation.get()
 
 
-  setReactivePosition: (lat, lng) ->
+  # External Call
+  setReactivePosition: (lat, lng, alt=0) ->
     posObj = 
       latitude: lat
       longitude: lng
-      accuracy: 1
-      altitudeAccuracy: 1
+      altitude: alt
+      accuracy: 10
+      altitudeAccuracy: 10
       speed: 0
       heading: 0
       updatedAt: new Date().getTime()
     reactiveLocation.set(posObj)
-
 
 
   getLastPosition: ->
@@ -157,12 +159,13 @@ Location =
       if lastPos
         return JSON.parse(lastPos)
     else
-      console.log 'Location: Perstitent storage to off'
+      console.log 'Location: Perstitent storage to off' if Location.debug
+    reactiveLocation.get()
     
 
   locate: (callback) ->
     navigator?.geolocation?.getCurrentPosition (pos) ->
-      console.log('getCurrentPosition pos:', pos, pos.coords.latitude, pos.coords.longitude) if Location.debug
+      console.log('getCurrentPosition pos:', pos, pos.coords.latitude, pos.coords.longitude, pos.coords.altitude) if Location.debug
       filteredPos = filter(pos)
       if filteredPos
         fixed = storePosition(filteredPos)
@@ -171,7 +174,7 @@ Location =
     
 
   startWatching: (callback) ->
-    if not @_watching and navigator.geolocation?
+    if not @_watching and navigator?.geolocation?
       @_watchId = navigator.geolocation.watchPosition (pos) ->
         console.log('watchPosition pos:', pos, pos.coords.latitude, pos.coords.longitude) if Location.debug
         filteredPos = filter(pos)
