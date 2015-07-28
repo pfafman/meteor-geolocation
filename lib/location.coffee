@@ -6,7 +6,7 @@
 # Defaults
 #
 
-options = 
+options =
   persistent: false  # This causes issues with retreval on restart etc.
   lazyLastPosition: false
   distanceFilter:
@@ -19,11 +19,11 @@ options =
     enabled: false
     rating: 12
 
-watchOptions = 
+watchOptions =
   enableHighAccuracy: true
   maximumAge: 0
 
-positionOptions = 
+positionOptions =
   enableHighAccuracy: true
   maximumAge: 0
 
@@ -41,7 +41,7 @@ locationError    = new ReactiveVar(null)
 #
 
 storePosition = (pos) ->
-  posObj = 
+  posObj =
     latitude: pos.coords.latitude
     longitude: pos.coords.longitude
     altitude: pos.coords.altitude
@@ -67,7 +67,7 @@ filter = (pos) ->
 
   
   if Location._options.distanceFilter.enabled
-    console.log('Filtering distance') if Location.debug 
+    console.log('Filtering distance') if Location.debug
     distance = getDistance(old, pos)
     console.log('Distance Filter: Filter - ' + Location._options.distanceFilter.range + '. Actual Distance - ' + distance) if Location.debug
     if distance < Location._options.distanceFilter.range
@@ -80,9 +80,9 @@ filter = (pos) ->
       return
 
   if Location._options.accuracyFilter.enabled and pos.coords.accuracy and !isNaN(pos.coords.accuracy)
-    console.log('Accuracy' + pos.coords.accuracy) if Location.debug 
+    console.log('Accuracy' + pos.coords.accuracy) if Location.debug
     if pos.coords.accuracy > Location._options.accuracyFilter.rating
-      console.log('Accuracy filter: Not accurate enough') if Location.debug 
+      console.log('Accuracy filter: Not accurate enough') if Location.debug
       return
   
   pos
@@ -104,7 +104,7 @@ rad = (x) ->
 
 getDistance = (p1, p2) ->
   if p1 and p2
-    console.log('Getting distance for', p1, p2) if Location.debug 
+    console.log('Getting distance for', p1, p2) if Location.debug
     R = 6378137
     # Earth’s mean radius in meter
     dLat = rad(p2.coords.latitude - p1.latitude)
@@ -116,8 +116,8 @@ getDistance = (p1, p2) ->
 
 isSecondsAway = (date, seconds) ->
   now = new Date
-  console.log('Time Calc: ' + now.getTime() - date.getTime()) if Location.debug 
-  console.log(seconds + ' Seconds: ' + seconds * 1000 + ' In Milliseconds') if Location.debug 
+  console.log('Time Calc: ' + now.getTime() - date.getTime()) if Location.debug
+  console.log(seconds + ' Seconds: ' + seconds * 1000 + ' In Milliseconds') if Location.debug
   now.getTime() - date.getTime() > seconds * 1000
 
 
@@ -141,7 +141,7 @@ Location =
 
   # External Call
   setReactivePosition: (lat, lng, alt=0) ->
-    posObj = 
+    posObj =
       latitude: lat
       longitude: lng
       altitude: alt
