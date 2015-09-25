@@ -1,6 +1,6 @@
 Package.describe({
   name: 'pfafman:geolocation',
-  version: '0.1.0',
+  version: '1.0.1',
   // Brief, one-line summary of the package.
   summary: 'A Geolocation Abstraction with Manual Starting / Stopping and location storage',
   // URL to the Git repository containing the source code for this package.
@@ -12,16 +12,16 @@ Package.describe({
 
 
 Cordova.depends({
-    "org.apache.cordova.geolocation": "0.3.12"
+    "org.apache.cordova.geolocation": "1.0.1"
 });
 
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.0.3.1');
+  api.versionsFrom('1.2');
 
   api.use(['reactive-var', 'coffeescript'], 'client');
 
-  api.addFiles('lib/location.coffee');
+  api.addFiles('lib/location.coffee', 'client');
 
   api.export('Location');
 });
