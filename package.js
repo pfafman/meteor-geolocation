@@ -1,6 +1,6 @@
 Package.describe({
   name: 'pfafman:geolocation',
-  version: '1.4.0',
+  version: '1.4.1',
   // Brief, one-line summary of the package.
   summary: 'A Geolocation Abstraction with Manual Starting / Stopping and location storage',
   // URL to the Git repository containing the source code for this package.
@@ -12,7 +12,7 @@ Package.describe({
 
 
 Cordova.depends({
-  "cordova-plugin-geolocation": "2.4.0"
+  "cordova-plugin-geolocation": "2.4.1"
 });
 
 
